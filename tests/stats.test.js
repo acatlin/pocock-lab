@@ -45,3 +45,13 @@ test("formatMonth labels a single-digit month with its abbreviated name and year
 test("formatMonth labels December", () => {
   assert.equal(formatMonth("2027-12"), "Dec 2027");
 });
+
+test("ridesByMonth sums ride counts given as strings and as numbers", () => {
+  assert.deepEqual(
+    ridesByMonth([
+      { date: "2026-07-01", city: "Boston", rides: "4" },
+      { date: "2026-07-02", city: "Boston", rides: 6 },
+    ]),
+    [{ month: "2026-07", rides: 10 }],
+  );
+});
