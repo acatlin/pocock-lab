@@ -24,17 +24,17 @@ export function ridesByMonth(rows) {
     totals.set(month, (totals.get(month) ?? 0) + Number(row.rides));
   }
   if (totals.size === 0) return [];
-  const months = [...totals.keys()].sort();
-  return span(months[0], months.at(-1)).map((month) => ({
+  const monthsWithRows = [...totals.keys()].sort();
+  return span(monthsWithRows[0], monthsWithRows.at(-1)).map((month) => ({
     month,
     rides: totals.get(month) ?? 0,
   }));
 }
 
 // Every consecutive year-month key from the first to the last, inclusive.
-function span(first, last) {
+function span(firstMonth, lastMonth) {
   const months = [];
-  for (let month = first; month <= last; month = nextMonth(month)) {
+  for (let month = firstMonth; month <= lastMonth; month = nextMonth(month)) {
     months.push(month);
   }
   return months;
