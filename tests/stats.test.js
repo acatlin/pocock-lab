@@ -38,6 +38,20 @@ test("ridesByMonth returns an empty array for no ride rows", () => {
   assert.deepEqual(ridesByMonth([]), []);
 });
 
+test("ridesByMonth gives a month inside the span with no ride rows zero rides", () => {
+  assert.deepEqual(
+    ridesByMonth([
+      { date: "2026-07-01", city: "Boston", rides: "10" },
+      { date: "2026-09-03", city: "Miami", rides: 5 },
+    ]),
+    [
+      { month: "2026-07", rides: 10 },
+      { month: "2026-08", rides: 0 },
+      { month: "2026-09", rides: 5 },
+    ],
+  );
+});
+
 test("formatMonth labels a single-digit month with its abbreviated name and year", () => {
   assert.equal(formatMonth("2026-07"), "Jul 2026");
 });
